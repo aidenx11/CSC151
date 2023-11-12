@@ -1,10 +1,12 @@
+import java.io.FileNotFoundException;
+
 /*
  * Class for testing the CarLot class
  * @Author: Brandon Siffer
  */
 public class CarLotTester {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 		
 		//Create a variable referencing the car lot's inventory
 		CarLot inventory = new CarLot();
@@ -94,6 +96,15 @@ public class CarLotTester {
 		//test the getTotalProfit method
 		System.out.println("\nTesting the getTotalProfit method: ");
 		System.out.println(inventory.getTotalProfit());
+
+		//test loadFromDisk() and saveToDisk() methods
+		System.out.println("Saving current inventory...");
+		inventory.saveToDisk();
+		System.out.println("Loading saved inventory...");
+		inventory.loadFromDisk();
+		System.out.println("Displaying loaded inventory...");
+		System.out.println(inventory.getInventory());
+
 	}
 
 }

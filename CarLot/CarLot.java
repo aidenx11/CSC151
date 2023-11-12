@@ -198,6 +198,10 @@ public class CarLot {
 		}
 	}
 
+	/**
+	 * Saves current inventory to carlot.txt file
+	 * @throws FileNotFoundException if carlot.txt is not found
+	 */
 	public void saveToDisk() throws FileNotFoundException {
 
 		try {
@@ -213,6 +217,10 @@ public class CarLot {
 
 	}
 
+	/**
+	 * loads inventory from carlot.txt to current inventory
+	 * @throws FileNotFoundException if carlot.txt is not found
+	 */
 	public void loadFromDisk() throws FileNotFoundException {
 		try {
 			File file = new File("carlot.txt");

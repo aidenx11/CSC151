@@ -1,2 +1,2 @@
 # CSC151 - WTCC Fall 2023
-Labs for CSC151 - Java Programming
+Labs and CarLot Project for CSC151 - Java Programming
