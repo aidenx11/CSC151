@@ -1,6 +1,7 @@
-
-
-public class Tester {
+/**
+ * Needed to change name of tester file due to interactions in GitHub project
+ */
+public class SchoolTester {
 	public static void main(String[] args) {
 		Person person = new Person("Peter");
 		Student student = new Student("Susan");
