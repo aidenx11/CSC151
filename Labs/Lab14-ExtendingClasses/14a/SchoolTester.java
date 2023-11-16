@@ -1,5 +1,5 @@
 /**
- * Needed to change name of tester file due to interactions in GitHub project
+ * Class was renamed due to compatibility issues with my GitHub
  */
 public class SchoolTester {
 	public static void main(String[] args) {
