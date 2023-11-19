@@ -236,8 +236,7 @@ public class CarLot extends ArrayList<Car> {
 			boolean sold = false;
 			double priceSold = 0;
 			while (input.hasNextLine()) {
-				String s = input.nextLine();
-				ID = s.substring(4);
+				ID = input.nextLine().substring(4);
 				mileage = Integer.parseInt(input.nextLine().substring(9));
 				mpg = Integer.parseInt(input.nextLine().substring(5));
 				cost = Double.parseDouble(input.nextLine().substring(6));

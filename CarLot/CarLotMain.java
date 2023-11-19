@@ -41,7 +41,7 @@ public class CarLotMain {
                         [9] Load Inventory from disk
                         [10] Save Inventory to disk
                         [11] Edit car Attributes
-                        Enter a number from 0 to 10 :\s""");
+                        Enter a number from 0 to 11 :\s""");
 				//checking to see if the user input is a valid option from the displayed list
 				boolean validInput = false;
 				option = input.nextInt();
