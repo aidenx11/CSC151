@@ -253,4 +253,59 @@ public class CarLot extends ArrayList<Car> {
 			System.out.println("No carlot.txt file found. Check directory or create a file by saving inventory to disk.");
 		}
 	}
-}
+
+	/**
+	 * Allows user to edit the attributes of a car already in the inventory
+	 * @param car to have attributes edited
+	 */
+	public void edit(Car car) {
+			Scanner input = new Scanner(System.in);
+			System.out.println("Which attribute of the " + car.getId() + " would you like to edit?");
+			System.out.println("""
+								[0] ID
+								[1] Mileage
+								[2] MPG
+								[3] Cost to Dealership
+								[4] List/Sales Price""");
+			switch (input.nextInt()) {
+				case 0:
+					System.out.println("Enter the new ID: ");
+					input.nextLine();
+					String oldId = car.getId();
+					String newId = input.nextLine();
+					car.setId(newId);
+					System.out.println(oldId + " was changed to " + newId);
+					break;
+				case 1:
+					System.out.println("Enter the new Mileage: ");
+					int oldMileage = car.getMileage();
+					int newMileage = input.nextInt();
+					car.setMileage(newMileage);
+					System.out.println(oldMileage + " was changed to " + newMileage);
+					break;
+				case 2:
+					System.out.println("Enter the new MPG: ");
+					int oldMPG = car.getMPG();
+					int newMPG = input.nextInt();
+					car.setMpg(newMPG);
+					System.out.println(oldMPG + " was changed to " + newMPG);
+					break;
+				case 3:
+					System.out.println("Enter the new cost: ");
+					double oldCost = car.getCost();
+					double newCost = input.nextDouble();
+					car.setCost(newCost);
+					System.out.println(oldCost + " was changed to " + newCost);
+					break;
+				case 4:
+					System.out.println("Enter the new list/sales price: ");
+					double oldSalesPrice = car.getSalesPrice();
+					double newSalesPrice = input.nextDouble();
+					car.setSalesPrice(newSalesPrice);
+					System.out.println(oldSalesPrice + " was changed to " + newSalesPrice);
+					break;
+			}
+			input.close();
+		}
+	}
+

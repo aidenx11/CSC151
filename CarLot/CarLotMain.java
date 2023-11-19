@@ -40,6 +40,7 @@ public class CarLotMain {
                         [8] Display profit for all sold cars
                         [9] Load Inventory from disk
                         [10] Save Inventory to disk
+                        [11] Edit car Attributes
                         Enter a number from 0 to 10 :\s""");
 				//checking to see if the user input is a valid option from the displayed list
 				boolean validInput = false;
@@ -47,13 +48,13 @@ public class CarLotMain {
 				
 				while (!validInput) {
 					
-					if (option > -1 && option < 11) {
+					if (option > -1 && option < 12) {
 						
 					validInput = true;
 					
 					} else {
 						
-					System.out.println("Invalid input. Enter only a single integer from 0 to 8.");
+					System.out.println("Invalid input. Enter only a single integer from 0 to 11.");
 					option = input.nextInt();
 					
 					}
@@ -129,6 +130,12 @@ public class CarLotMain {
 					System.out.println("Saving data to carlot.txt...");
 					inventory.saveToDisk();
 					break;
+				case 11:
+					System.out.println("Which car would you like to edit? (enter an integer)");
+					for (int i = 0; i < inventory.size(); i++) {
+						System.out.println("[" + i + "] " + inventory.get(i).getId());
+					}
+					inventory.edit(inventory.get(input.nextInt()));
 				}
 			} while (option != 0);
 			//closing the scanner object

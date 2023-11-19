@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 /*
  * Class for testing the CarLot class
  * @Author: Brandon Siffer
+ * @author Aiden Schroeder
  */
 public class CarLotTester {
 
@@ -104,6 +105,10 @@ public class CarLotTester {
 		inventory.loadFromDisk();
 		System.out.println("Displaying loaded inventory...");
 		System.out.println(inventory.getInventory());
+
+		//test edit() method
+		System.out.println("Set ID of the 2018 Subaru Crosstrek to null using edit()");
+		inventory.edit(inventory.findCarByIdentifier("2018 Subaru Crosstrek"));
 
 	}
 
