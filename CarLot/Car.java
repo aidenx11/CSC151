@@ -221,7 +221,9 @@ public class Car
 	@Override
 	public String toString()
 	{
-		return ("ID: " + this.getId() + "\nMileage: " + this.getMileage() + "\nMPG: " + this.getMPG() + "\nCost: " + this.getCost() + "\nSales Price: " + this.getSalesPrice());
+		return ("ID: " + this.getId() + "\nMileage: " + this.getMileage() + "\nMPG: "
+				+ this.getMPG() + "\nCost: " + this.getCost() + "\nSales Price: " + this.getSalesPrice()
+				+ "\nSold? " + this.isSold() + "\nPrice Sold: " + this.getPriceSold());
 	}
 
 }

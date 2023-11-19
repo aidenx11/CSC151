@@ -12,23 +12,26 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  * Class to manage inventory of cars for sale
  */
-public class CarLot {
-	ArrayList<Car> inventory = new ArrayList<>();
+public class CarLot extends ArrayList<Car> {
 
 	//Default getter for inventory
 	public ArrayList<Car> getInventory() {
-		return inventory;
+		return this;
 	}
 
 	//Default setter for inventory
 	public void setInventory(ArrayList<Car> inventory) {
-		this.inventory = inventory;
+		this.clear();
+		for (int i = 0; i < inventory.size(); i++) {
+			this.add(inventory.get(i));
+		}
 	}
 
 	/**
@@ -39,9 +42,9 @@ public class CarLot {
 	 */
 	public Car findCarByIdentifier(String identifier) {
 
-		for (int i = 0; i < inventory.size(); i++) {
-			if (this.inventory.get(i).getId().equals(identifier)) {
-				return this.inventory.get(i);
+		for (int i = 0; i < this.size(); i++) {
+			if (this.get(i).getId().equals(identifier)) {
+				return this.get(i);
 			}
 		}
 		return null;
@@ -53,10 +56,10 @@ public class CarLot {
 	 * @return array of cars in order of entry
 	 */
 	public ArrayList<Car> getCarsInOrderOfEntry() {
-		ArrayList<Car> sortedArrayList = new ArrayList<>(this.inventory.size());
+		ArrayList<Car> sortedArrayList = new ArrayList<>(this.size());
 
-		for (int i = this.inventory.size() - 1; i >= 0; i--) {
-			sortedArrayList.add(this.inventory.get(i));
+		for (int i = this.size() - 1; i >= 0; i--) {
+			sortedArrayList.add(this.get(i));
 		}
 
 		return sortedArrayList;
@@ -69,10 +72,10 @@ public class CarLot {
 	 * @return the sorted array
 	 */
 	public ArrayList<Car> getCarsSortedByMPG() {
-		ArrayList<Car> sortedArray = new ArrayList<>(this.inventory);
+		ArrayList<Car> sortedArray = new ArrayList<>(this);
 
-		for (int i = 0; i < this.inventory.size(); i++) {
-			sortedArray.set(i, this.inventory.get(i));
+		for (int i = 0; i < this.size(); i++) {
+			sortedArray.set(i, this.get(i));
 		}
 
 		for (int i = 0; i < sortedArray.size(); i++) {
@@ -96,7 +99,7 @@ public class CarLot {
 	 * @return car with highest mpg
 	 */
 	public Car getCarWithBestMPG() {
-		ArrayList<Car> checkMPG = this.inventory;
+		ArrayList<Car> checkMPG = this;
 		Car highestMPG = new Car();
 		int highest = 0;
 		for (Car car : checkMPG) {
@@ -116,7 +119,7 @@ public class CarLot {
 	 * @return car with highest mileage
 	 */
 	public Car getCarWithHighestMileage() {
-		ArrayList<Car> checkMileage = this.inventory;
+		ArrayList<Car> checkMileage = this;
 		Car highestMileage = new Car();
 		int highest = 0;
 		for (Car car : checkMileage) {
@@ -138,7 +141,7 @@ public class CarLot {
 	public double getAverageMpg() {
 		double average = 0.0;
 		int sum = 0;
-		ArrayList<Car> carList = this.inventory;
+		ArrayList<Car> carList = this;
 		int size = carList.size();
 		for (Car car : carList) {
 			sum += car.getMPG();
@@ -155,7 +158,7 @@ public class CarLot {
 	 */
 	public double getTotalProfit() {
 		double totalProfit = 0.0;
-		for (Car car : this.inventory) {
+		for (Car car : this) {
 			if (car.isSold()) {
 				totalProfit += car.getProfit();
 			}
@@ -175,7 +178,7 @@ public class CarLot {
 	public void addCar(String id, int milage, int mpg, double cost, double salesPrice) {
 
 		Car incomingCar = new Car(id, milage, mpg, cost, salesPrice);
-		this.inventory.add(incomingCar);
+		this.add(incomingCar);
 	}
 
 	/**
@@ -207,8 +210,8 @@ public class CarLot {
 		try {
 			File carlot = new File("carlot.txt");
 			PrintWriter out = new PrintWriter("carlot.txt");
-			for (int i = 0; i < inventory.size(); i++) {
-				out.write(inventory.get(i).toString() + "\n");
+			for (int i = 0; i < this.size(); i++) {
+				out.write(this.get(i).toString() + "\n");
 			}
 			out.close();
 		} catch (FileNotFoundException ex) {
@@ -230,7 +233,8 @@ public class CarLot {
 			int mpg = 0;
 			double cost = 0;
 			double salesPrice = 0;
-			boolean complete;
+			boolean sold = false;
+			double priceSold = 0;
 			while (input.hasNextLine()) {
 				String s = input.nextLine();
 				ID = s.substring(4);
@@ -238,10 +242,15 @@ public class CarLot {
 				mpg = Integer.parseInt(input.nextLine().substring(5));
 				cost = Double.parseDouble(input.nextLine().substring(6));
 				salesPrice = Double.parseDouble(input.nextLine().substring(12));
-				inventory.add(new Car(ID, mileage, mpg, cost, salesPrice));
+				sold = Boolean.parseBoolean(input.nextLine().substring(6));
+				priceSold = Double.parseDouble(input.nextLine().substring(12));
+				this.add(new Car(ID, mileage, mpg, cost, salesPrice));
+				if (sold) {
+					this.findCarByIdentifier(ID).sellCar(priceSold);
+				}
 			}
 		} catch (FileNotFoundException ex) {
-			ex.printStackTrace();
+			System.out.println("No carlot.txt file found. Check directory or create a file by saving inventory to disk.");
 		}
 	}
 }
